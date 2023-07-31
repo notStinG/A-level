@@ -1,0 +1,82 @@
+## Task 2.1
+import random as r
+
+## 100 random integer in a list and returns it
+def task2_1():
+    global intlist
+    for a in range(100):
+        intlist.append(r.randint(1, 100))
+    return intlist
+
+## Task 2.2
+## Bubble sort function
+def bubbleSort(arr):
+    n = len(arr)
+    # Traverse through all array elements
+    for i in range(n):
+
+        # Last i elements are already in place
+        for j in range(i, n):
+
+            # Swap if the element found is greater than the next element
+            if arr[j] > arr[i]:
+                arr[j], arr[i] = arr[i], arr[j]
+
+## Task 2.3
+## Merge sort procedure
+def mergeSort(arr):
+    if len(arr) > 1:
+        # Finding the mid of the array
+        mid = len(arr) // 2
+        # Dividing the array elements into 2 halves
+        left = arr[:mid]
+        right = arr[mid:]
+        # Sorting the first half
+        mergeSort(left)
+        # Sorting the second half
+        mergeSort(right)
+
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+
+        # Checking if any element was left
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1
+
+
+
+## Task 2.4
+## The main code to execute the functions
+def main():
+    error = True
+    unsortedlist = task2_1()
+    choice = input("Please select a sorting function you would like to use: \n(1) Bubble Sort \n(2) Marge Sort \n(X) End Code\n")
+    if choice == "X" or (choice in "12" and len(choice) == 1):
+        error = False
+    while error:
+        choice = input("Invalid input. Please select a sorting function you would like to use: \n(1) Bubble Sort \n(2) Marge Sort \n(X) End Code\n")
+        if choice == "X" or (choice in "12" and len(choice) == 1):
+            error = False
+    if choice != "X":
+        if choice == "1":
+            print("Bubble sorted list: {}".format(bubbleSort(unsortedlist)))
+        if choice == "2":
+            print("Merge sorted list: {}".format(mergeSort(unsortedlist)))
+    return None
+
+
+## Running the main code
+main()
