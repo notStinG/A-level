@@ -1,0 +1,50 @@
+## Task 1.1
+def encrypt(char):
+
+    ## Checking its ASCII
+    asciichar = ord(char)
+
+    ## Checking if it is a space
+    if char.isspace() == True:
+        return ord("!")
+
+    ## Checking if it is an uppercase letter and adding 10
+    elif asciichar >= 65 and asciichar <= 90:
+        asciichar += 10
+        if asciichar > 90:
+            asciichar -= 26
+
+    ## Checking if it is an lowercase letter and adding 10
+    elif asciichar >= 97 and asciichar <= 122:
+        asciichar += 10
+        if asciichar > 122:
+            asciichar -= 26
+
+    ## If it fails
+    else:
+        return -1
+
+    ## Return the value of the new encrypted character
+    return asciichar
+
+
+## Task 1.2
+def main():
+    userinput = input()
+    enc_char = encrypt(userinput)
+    if enc_char == -1:
+        print("Input invalid. Please input a character or a space.")
+    else:
+        print(chr(enc_char))
+main()
+
+
+
+## Task 1.3
+enc_msg = ""
+with open("ENCRYPTEDMESSAGE.txt", "w") as x:
+  for char in open("DATATOENCRYPT.txt", "r").read():
+    enc_char = encrypt(char)
+    if enc_char != -1:
+      enc_msg += chr(enc_char)
+  x.write(enc_msg)
